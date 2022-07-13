@@ -3,17 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-  <link rel="stylesheet" href="./style.css">
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
 
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
-   integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
-   crossorigin=""/>
- <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
-   integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
-   crossorigin=""></script>
-  
+  integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+  crossorigin=""/>
+  <link rel="stylesheet" href="style.css">
   <title>Frontend Mentor | IP Address Tracker</title>
+
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
   <style>
     .attribution { font-size: 11px; text-align: center; }
@@ -21,22 +19,54 @@
   </style>
 </head>
 <body>
+  <div class="ip_head"> 
+    <h1 class="ip_head_heading">IP Address Tracker</h1>
+    <div class="ip_input_div">
+      <input type="text" id="ip_address" class="ip_input" name="ip_input" placeholder="Search for any IP address or domain">
+      <input type="button" class="ip_find" value="" onclick="">
+    </div>
+  </div>  
 
-  <div id="map">
+  <div class="ip_details">
+    <div class="ans" id="ip">IP ADDRESS</div>
+    <div class="ans" id="loc">LOCATION</div>
+    <div class="ans" id="time">TIMEZONE</div>
+    <div class="ans" id="isp">Internet SERVICE PROVIDER</div>
   </div>
+
+  <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+  integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+  crossorigin=""></script>
+
+  <div id="map"></div>
   <script>
 
-    var mymap = L.map('mapid').setView([51.505, -0.09], 13);
-    
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(mymap);
-    
-    
-    </script>
-  <div class="attribution" role="footnote">
+    function find_location(ip_add) 
+    {
+    var ip = ip_add;
+    var ip_finder = "at_hZ6WRujt0fXcyKjX3B9U9nblWApPi";
+    const ip_location = $(function () {
+       $.ajax({
+           url: "https://geo.ipify.org/api/v1",
+           data: {apiKey: ip_finder, ipAddress: ip},
+           success: function(data) {
+               $("body").append("<pre>"+ JSON.stringify(data,"",2)+"</pre>");
+           }
+       });
+    });
+    }
+    var map = L.map('map').setView([51.505, -0.09], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+  </script>
+  
+  <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="https://github.com/biscuitcandy" target="_blank">BiscuitCandy</a>.
+    Coded by <a href="#">Your Name Here</a>.
   </div>
 </body>
 </html>

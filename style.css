@@ -1,7 +1,110 @@
 body {
-   
+    
+    margin: 0px;
+
+}
+
+.ip_head {
+    background-image: url("./images/pattern-bg.png");
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 40vh;
+    position: absolute;
+    z-index: 1;
+    width: 100vw;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+
+.ip_head_heading {
+    color: white;;
+
+}
+
+.ip_input_div {
+    display: flex;
+}
+
+.ip_input {
+    width: 300px;
+    height: 30px; 
+    border-radius: 10px 0px 0px 10px;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.ip_input:focus-visible {
+    outline-offset: unset;
+    outline: none;
+}
+
+.ip_find {
+    background-image: url("./images/icon-arrow.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 50px;
+    background-color: black;
+    border-radius: 0px 10px 10px 0px;
+    padding: 10px;
+}
+
+.ip_find:hover {
+    background-color: rgb(53, 48, 48);
 }
 
 #map { 
-    height: 300px;
+    height: 70vh;
+    position: absolute;
+    z-index: 1;
+    top: 30vh;
+}
+
+.ip_details {
+    display: flex;
+    flex-direction: row;
+    height: 20vh;
+    width: 70%;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 1px solid black;
+    margin: auto;
+    position: absolute;
+    z-index: 2;
+    top: 20vh;
+    left: 15%;
+    background-color: white;
+    border-radius: 10px;
+    
+}
+
+.ans {
+    border-width: 0px 1px 0px 0px;
+    border-style: solid;
+    border-color: lightgrey;
+    width: 15%;
+    height: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0px 10px;
+    
+}
+
+#ip{
+
+}
+
+#loc {
+
+}
+
+#time {
+
+}
+
+#isp {
+    border: none;
 }
