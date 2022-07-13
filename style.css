@@ -56,10 +56,10 @@ body {
 }
 
 #map { 
-    height: 70vh;
-    position: absolute;
+    height: 60vh;
+    position: relative;
     z-index: 1;
-    top: 30vh;
+    top: 40vh;
 }
 
 .ip_details {
