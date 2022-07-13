@@ -79,7 +79,8 @@
                document.getElementById("isp").innerHTML = data.isp;
                
                map.setView([data.location.lat, data.location.lng], 13);
-               var marker = L.marker([data.location.lat, data.location.lng]).addTo(map);
+    
+               var marker = L.marker([data.location.lat, data.location.lng], {icon: leaf_icon}).addTo(map);
            }
        });
     });
@@ -91,7 +92,7 @@
         attribution: '© OpenStreetMap'
     }).addTo(map);
 
-    var leaf_icon = L.Icon.Default.imagePath = './images/icon-location.svg';
+    var leaf_icon = L.icon({iconUrl:'./images/iconlocation.svg'});
 
     // var leaf_icon = new LeafIcon(
     //   {
