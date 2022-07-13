@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
@@ -23,15 +25,27 @@
     <h1 class="ip_head_heading">IP Address Tracker</h1>
     <div class="ip_input_div">
       <input type="text" id="ip_address" class="ip_input" name="ip_input" placeholder="Search for any IP address or domain">
-      <input type="button" class="ip_find" value="" onclick="">
+      <input type="button" class="ip_find" value="" onclick="find_location()">
     </div>
   </div>  
 
   <div class="ip_details">
-    <div class="ans" id="ip">IP ADDRESS</div>
-    <div class="ans" id="loc">LOCATION</div>
-    <div class="ans" id="time">TIMEZONE</div>
-    <div class="ans" id="isp">Internet SERVICE PROVIDER</div>
+    <div class="ans">
+      <div class="ans_head">IP ADDRESS</div>
+      <div class="ans_div" id="ip">ip</div>
+    </div>
+    <div class="ans">
+      <div class="ans_head">LOCATION</div>
+      <div class="ans_div" id="loc">loc</div>
+    </div>
+    <div class="ans">
+      <div class="ans_head">TIMEZONE</div>
+      <div class="ans_div" id="time">timezone</div>
+    </div>
+    <div class="ans" id="isp_div">
+      <div class="ans_head">ISP</div>
+      <div class="ans_div" id="isp">isp</div>
+    </div>
   </div>
 
   <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
@@ -41,27 +55,51 @@
   <div id="map"></div>
   <script>
 
-    function find_location(ip_add) 
+    function find_location() 
     {
-    var ip = ip_add;
+    var ip = document.getElementById("ip_address").value;
     var ip_finder = "at_hZ6WRujt0fXcyKjX3B9U9nblWApPi";
+    if (ip == "") {
+      ip = "8.8.8.8";
+    }
     const ip_location = $(function () {
        $.ajax({
            url: "https://geo.ipify.org/api/v1",
            data: {apiKey: ip_finder, ipAddress: ip},
            success: function(data) {
-               $("body").append("<pre>"+ JSON.stringify(data,"",2)+"</pre>");
+              console.log(data);
+              // console.log(data.location.lat, data.location.lng);
+              // console.log(data.location.city, data.location.region, data.location.country);
+              // console.log(data.location.timezone)
+              // console.log(data.isp);
+
+               document.getElementById("ip").innerHTML = ip;
+               document.getElementById("loc").innerHTML = data.location.region +  ", "+ data.location.country + ", " + data.location.postalCode;
+               document.getElementById("time").innerHTML = "UTC" + data.location.timezone;
+               document.getElementById("isp").innerHTML = data.isp;
+               
+               map.setView([data.location.lat, data.location.lng], 13);
+               var marker = L.marker([data.location.lat, data.location.lng]).addTo(map);
            }
        });
     });
     }
-    var map = L.map('map').setView([51.505, -0.09], 13);
+    var map = L.map('map').setView([53.58,54.15], 13);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '© OpenStreetMap'
     }).addTo(map);
 
+    var leaf_icon = L.Icon.Default.imagePath = './images/icon-location.svg';
+
+    // var leaf_icon = new LeafIcon(
+    //   {
+    //     iconUrl: "./images/icon-location.svg";
+    //   }
+    // );
+
+    find_location();
   </script>
   
   <div class="attribution">

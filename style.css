@@ -1,5 +1,5 @@
 body {
-    
+    font-family: 'Rubik', sans-serif;
     margin: 0px;
 
 }
@@ -16,11 +16,12 @@ body {
     width: 100vw;
     background-repeat: no-repeat;
     background-size: cover;
-    
 }
 
 .ip_head_heading {
-    color: white;;
+    color: white;
+    margin-top: 10vh;
+    font-weight: 700;;
 
 }
 
@@ -69,7 +70,6 @@ body {
     width: 70%;
     align-items: center;
     justify-content: space-evenly;
-    border: 1px solid black;
     margin: auto;
     position: absolute;
     z-index: 2;
@@ -84,17 +84,33 @@ body {
     border-width: 0px 1px 0px 0px;
     border-style: solid;
     border-color: lightgrey;
-    width: 15%;
+    width: 20%;
     height: 60%;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     justify-content: flex-start;
+    row-gap: 2.5vh;
     margin: 0px 10px;
-    
+
 }
 
-#ip{
+.ans_head {
+    color: gray;
+    font-size: 12px;
+    font-weight: 400;
 
+}
+
+
+.ans_div{
+    font-size: 18px;
+    font-weight: 500;
+
+}
+
+#ip_div{
+    margin-left: 30px;
 }
 
 #loc {
@@ -105,6 +121,6 @@ body {
 
 }
 
-#isp {
+#isp_div {
     border: none;
 }
